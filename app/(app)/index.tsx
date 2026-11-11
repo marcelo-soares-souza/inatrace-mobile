@@ -20,6 +20,10 @@ export default function Home() {
   const offlineMapStatus = useOfflineMapStatus();
 
   const authenticated = sessionState === 'authenticated';
+  const navHint =
+    sessionState === 'guest'
+      ? i18n.t('home.sessionNotice.navGuestArea')
+      : i18n.t('home.sessionNotice.navLoginRequired');
 
   useEffect(() => {
     const unsubscribe = i18n.onChange(() => {
@@ -41,12 +45,14 @@ export default function Home() {
           icon={FarmerSvg}
           link="/(farmers)/farmers"
           disabled={!authenticated}
+          hint={navHint}
         />
         <HomeNavButton
           title={i18n.t('home.newPlot')}
           icon={PlotSvg}
           link="/(farmers)/newplot"
           disabled={!authenticated}
+          hint={navHint}
         />
       </View>
       <View>
