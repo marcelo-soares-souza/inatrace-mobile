@@ -1,6 +1,6 @@
 import { AuthContext } from '@/context/AuthContext';
 import cn from '@/utils/cn';
-import { Link } from 'expo-router';
+import { type Href, Link } from 'expo-router';
 import { ChevronLeft, Info, User2 } from 'lucide-react-native';
 import { useContext } from 'react';
 import { View, Text, Pressable } from 'react-native';
@@ -12,7 +12,12 @@ export type TopbarProps = {
 };
 
 export default function Topbar(props: TopbarProps) {
-  const { setDocumentationModal } = useContext(AuthContext);
+  const { setDocumentationModal, sessionState } = useContext(AuthContext);
+
+  const profileHref: Href =
+    sessionState === 'authenticated' || sessionState === 'guest'
+      ? '/user-settings'
+      : '/login';
 
   return (
     <View>
@@ -42,7 +47,7 @@ export default function Topbar(props: TopbarProps) {
           <Pressable onPress={() => setDocumentationModal(true)}>
             <Info size={28} color={Colors.black} />
           </Pressable>
-          <Link href="/user-settings" asChild>
+          <Link href={profileHref} asChild>
             <Pressable>
               {({ pressed }) => (
                 <View
