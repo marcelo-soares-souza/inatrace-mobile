@@ -1,7 +1,6 @@
 import { useNavigation } from 'expo-router';
 import {
   Check,
-  ChevronLeft,
   Download,
   Navigation,
   Trash,
@@ -31,6 +30,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import cn from '@/utils/cn';
 import type { Camera as CameraRef } from '@rnmapbox/maps';
 import Colors from '@/constants/Colors';
+import HeaderBackButton from '@/components/common/HeaderBackButton';
 
 Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN ?? '');
 
@@ -65,15 +65,11 @@ export default function MapDownload() {
     navigation.setOptions({
       title: i18n.t('plots.mapDownload'),
       headerLeft: () => (
-        <Pressable
+        <HeaderBackButton
           onPress={() =>
             selectingMap ? setSelectingMap(false) : navigation.goBack()
           }
-          className="flex flex-row justify-center items-center mr-3"
-        >
-          <ChevronLeft color={Colors.orange} />
-          <Text className="font-medium text-Orange text-[18px]">Back</Text>
-        </Pressable>
+        />
       ),
     });
   }, [selectingMap]);
@@ -295,11 +291,11 @@ export default function MapDownload() {
           {location ? (
             <Mapbox.MapView
               className="border-[5px] border-blue-500"
-              style={{
-                height:
-                  Dimensions.get('window').height -
-                  (Platform.OS === 'android' ? 254 : 304),
-              }}
+              style={
+                Platform.OS === 'ios'
+                  ? { flex: 1 }
+                  : { height: Dimensions.get('window').height - 254 }
+              }
               ref={mapRef}
               onMapIdle={onRegionDidChange}
               styleURL={Mapbox.StyleURL.SatelliteStreet}

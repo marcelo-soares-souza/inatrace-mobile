@@ -1,5 +1,4 @@
 import { Stack, router, useSegments } from 'expo-router';
-import { Pressable, Text } from 'react-native';
 import { useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 import { AuthContext } from '@/context/AuthContext';
@@ -10,8 +9,7 @@ import Mapbox from '@rnmapbox/maps';
 type OfflinePack = NonNullable<
   Awaited<ReturnType<typeof Mapbox.offlineManager.getPack>>
 >;
-import { ChevronLeft } from 'lucide-react-native';
-import Colors from '@/constants/Colors';
+import HeaderBackButton from '@/components/common/HeaderBackButton';
 
 Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN ?? '');
 
@@ -89,14 +87,19 @@ export default function AppLayout() {
   };
 
   return (
-    <Stack>
+    <Stack
+      screenOptions={{
+        headerTransparent: { ios: false },
+        headerBackButtonDisplayMode: 'minimal',
+      }}
+    >
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen
         name="data-sync"
         options={{
           presentation: 'modal',
           title: i18n.t('home.syncData'),
-          headerLeft: () => <LeftHeader />,
+          headerLeft: () => <HeaderBackButton />,
         }}
       />
       <Stack.Screen name="(farmers)" options={{ headerShown: false }} />
@@ -105,7 +108,7 @@ export default function AppLayout() {
         options={{
           presentation: 'modal',
           title: i18n.t('userSettings.title'),
-          headerLeft: () => <LeftHeader />,
+          headerLeft: () => <HeaderBackButton />,
         }}
       />
       <Stack.Screen
@@ -113,16 +116,9 @@ export default function AppLayout() {
         options={{
           presentation: 'modal',
           title: i18n.t('plots.mapDownload'),
-          headerLeft: () => <LeftHeader />,
+          headerLeft: () => <HeaderBackButton />,
         }}
       />
     </Stack>
   );
 }
-
-const LeftHeader = () => (
-  <Pressable className="flex flex-row justify-center items-center mr-3">
-    <ChevronLeft color={Colors.orange} />
-    <Text className="font-medium text-Orange text-[18px]">Back</Text>
-  </Pressable>
-);
