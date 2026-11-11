@@ -61,7 +61,9 @@
       "guest": "Du nutzt den Gastmodus.",
       "logIn": "Anmelden",
       "continueAsGuest": "Als Gast fortfahren",
-      "openGuestArea": "Gastbereich öffnen"
+      "openGuestArea": "Gastbereich öffnen",
+      "navLoginRequired": "Melde dich an",
+      "navGuestArea": "Nutze den Gastbereich"
     }
   },
   "farmers": {

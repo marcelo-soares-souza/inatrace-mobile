@@ -61,7 +61,9 @@
       "guest": "Uri gukoresha uburyo bw'umushyitsi.",
       "logIn": "Injira",
       "continueAsGuest": "Komeza nk'umushyitsi",
-      "openGuestArea": "Fungura ahantu h'umushyitsi"
+      "openGuestArea": "Fungura ahantu h'umushyitsi",
+      "navLoginRequired": "Injira kugira ngo ukoreshe",
+      "navGuestArea": "Koresha ahantu h'umushyitsi"
     }
   },
   "farmers": {

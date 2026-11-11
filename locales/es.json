@@ -61,7 +61,9 @@
       "guest": "Estás usando el modo invitado.",
       "logIn": "Iniciar sesión",
       "continueAsGuest": "Continuar como invitado",
-      "openGuestArea": "Abrir área de invitado"
+      "openGuestArea": "Abrir área de invitado",
+      "navLoginRequired": "Inicia sesión para usar",
+      "navGuestArea": "Usa el área de invitado"
     }
   },
   "farmers": {
