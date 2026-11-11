@@ -54,7 +54,15 @@
     "title": "Startseite",
     "farmers": "Bauern",
     "newPlot": "Neue Parzelle",
-    "syncData": "Daten synchronisieren"
+    "syncData": "Daten synchronisieren",
+    "sessionNotice": {
+      "none": "Melde dich an, um fortzufahren, oder nutze den Gastmodus.",
+      "expired": "Deine Sitzung ist abgelaufen. Melde dich erneut an.",
+      "guest": "Du nutzt den Gastmodus.",
+      "logIn": "Anmelden",
+      "continueAsGuest": "Als Gast fortfahren",
+      "openGuestArea": "Gastbereich öffnen"
+    }
   },
   "farmers": {
     "title": "Bauern",

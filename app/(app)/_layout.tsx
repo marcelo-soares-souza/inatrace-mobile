@@ -20,16 +20,15 @@ export const unstable_settings = {
 };
 
 export default function AppLayout() {
-  const { checkAuth, accessToken, guestAccess, logInGuest } =
-    useContext(AuthContext);
+  const { checkAuth, accessToken, guestAccess } = useContext(AuthContext);
 
   const segments = useSegments();
 
   const hasNavigatedToMapDownload = useRef(false);
-  const hasNavigatedToDefaultFarmer = useRef(false);
 
   const prevAccessToken = useRef(accessToken);
   const prevSegments = useRef(segments);
+  const lastCheckedToken = useRef<string | null>(null);
 
   useEffect(() => {
     if (
@@ -48,27 +47,21 @@ export default function AppLayout() {
       return;
     }
 
-    if (accessToken === 'none') {
-      await handleLoginGuest();
-    } else if (accessToken) {
-      const isAuth = await checkAuth();
-
-      if (!isAuth) {
-        // An expired stored session must not silently become guest access.
-        router.replace('/login');
-      } else {
-        await checkForOfflineMaps();
-      }
+    if (!accessToken || accessToken === 'none') {
+      return;
     }
-  }, [accessToken, segments]);
 
-  const handleLoginGuest = async () => {
-    await logInGuest();
-    if (!hasNavigatedToDefaultFarmer.current) {
-      hasNavigatedToDefaultFarmer.current = true;
-      router.push('/(app)/(farmers)/info/0');
+    if (lastCheckedToken.current === accessToken) {
+      return;
     }
-  };
+    lastCheckedToken.current = accessToken;
+
+    const isAuth = await checkAuth();
+
+    if (isAuth) {
+      await checkForOfflineMaps();
+    }
+  }, [accessToken, guestAccess]);
 
   const checkForOfflineMaps = async () => {
     // Only offer the offline-map onboarding from the entry screen. Running

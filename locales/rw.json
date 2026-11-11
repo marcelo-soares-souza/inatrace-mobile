@@ -54,7 +54,15 @@
     "title": "Ahabanza",
     "farmers": "Abahinzi",
     "newPlot": "Ikibanza gishya",
-    "syncData": "Hindura amakuru"
+    "syncData": "Hindura amakuru",
+    "sessionNotice": {
+      "none": "Injira kugira ngo ukomeze cyangwa ukoreshe uburyo bw'umushyitsi.",
+      "expired": "Igihe cyawe cyarangiye. Ongera winjire.",
+      "guest": "Uri gukoresha uburyo bw'umushyitsi.",
+      "logIn": "Injira",
+      "continueAsGuest": "Komeza nk'umushyitsi",
+      "openGuestArea": "Fungura ahantu h'umushyitsi"
+    }
   },
   "farmers": {
     "title": "Abahinzi",

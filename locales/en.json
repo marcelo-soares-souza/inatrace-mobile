@@ -54,7 +54,15 @@
     "title": "Home",
     "farmers": "Farmers",
     "newPlot": "New plot",
-    "syncData": "Sync data"
+    "syncData": "Sync data",
+    "sessionNotice": {
+      "none": "Log in to continue or use guest mode.",
+      "expired": "Your session expired. Log in again.",
+      "guest": "You are using guest mode.",
+      "logIn": "Log in",
+      "continueAsGuest": "Continue as guest",
+      "openGuestArea": "Open guest area"
+    }
   },
   "farmers": {
     "title": "Farmers",

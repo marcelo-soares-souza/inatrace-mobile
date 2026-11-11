@@ -3,15 +3,20 @@ import { View } from 'react-native';
 
 import Topbar from '@/components/common/Topbar';
 import HomeNavButton from '@/components/home/HomeNavButton';
+import SessionNotice from '@/components/home/SessionNotice';
 import FarmerSvg from '@/components/svg/FarmerSvg';
 import PlotSvg from '@/components/svg/PlotSvg';
 
 import i18n from '@/locales/i18n';
 import SyncDataButton from '@/components/home/SyncDataButton';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '@/context/AuthContext';
 
 export default function Home() {
   const [_, setLocale] = useState(i18n.locale);
+  const { sessionState, logInGuest } = useContext(AuthContext);
+
+  const authenticated = sessionState === 'authenticated';
 
   useEffect(() => {
     const unsubscribe = i18n.onChange(() => {
@@ -32,15 +37,25 @@ export default function Home() {
           title={i18n.t('home.farmers')}
           icon={FarmerSvg}
           link="/(farmers)/farmers"
+          disabled={!authenticated}
         />
         <HomeNavButton
           title={i18n.t('home.newPlot')}
           icon={PlotSvg}
           link="/(farmers)/newplot"
+          disabled={!authenticated}
         />
       </View>
-      <View className="pb-5 border-t bg-White border-t-LightGray">
-        <SyncDataButton />
+      <View>
+        <SessionNotice
+          state={sessionState}
+          onGuest={() => {
+            void logInGuest();
+          }}
+        />
+        <View className="pb-5 border-t bg-White border-t-LightGray">
+          <SyncDataButton />
+        </View>
       </View>
     </SafeAreaView>
   );
